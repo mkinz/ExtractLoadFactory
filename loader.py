@@ -1,11 +1,12 @@
 import logging
 from logging import Logger
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 from datetime import datetime
 from dbcon import DBConnector
 
 logger: Logger = logging.getLogger(__name__)
 
+@runtime_checkable
 class Loader(Protocol):
     def load_data(self, target_db_connection: DBConnector, data_to_load, date_time: datetime):
         pass

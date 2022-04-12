@@ -8,3 +8,6 @@ class ExtractorTestCases(unittest.TestCase):
     def test_concrete_extractor_is_instance_of_Extractor(self):
         dut = ConcreteExtractorInstanceA()
         self.assertIsInstance(dut, Extractor)
+
+if __name__ == '__main__':
+    unittest.main()
