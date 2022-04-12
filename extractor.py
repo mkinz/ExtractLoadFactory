@@ -18,3 +18,4 @@ class ConcreteExtractorInstanceA:
         query = f"select * from myschema.mytable where date = {date_time}"
         logger.debug(query)
         logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable ")
+        return "### Mock extracted Data from Source A ###"
