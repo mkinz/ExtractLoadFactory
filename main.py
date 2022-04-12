@@ -28,6 +28,14 @@ def run_app():
         extractor_object = fac.get_extractor()
         extracted_data = extractor_object.extract(source_conn, today)
 
+        target_db_connector_object = fac.get_target_connector()
+        target_conn = target_db_connector_object.connect_to_db()
+
+        loader_object = fac.get_loader()
+        loader_object.load_data(target_conn, extracted_data, today)
+
+        logger.info("Extract and Load complete.\n")
+
 def main():
     run_app()
 

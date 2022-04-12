@@ -19,4 +19,5 @@ class ConcreteLoaderInstanceA:
         logger.debug(f"Ran the following SQL:")
         logger.debug(query)
         logger.debug(f"Load sql query complete to {target_db_connection}.myschema.mytable.")
+        logger.debug(f"Loaded the following data: {data_to_load}")
         return target_db_connection
