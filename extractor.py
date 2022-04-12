@@ -1,11 +1,12 @@
 import logging
 from logging import Logger
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 from datetime import datetime
 from dbcon import DBConnector
 
 logger: Logger = logging.getLogger(__name__)
 
+@runtime_checkable
 class Extractor(Protocol):
     """"
     Interface that defines an extractor class
