@@ -1,10 +1,11 @@
 import logging
 from logging import Logger
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
 logger: Logger = logging.getLogger(__name__)
 
 
+@runtime_checkable
 class DBConnector(Protocol):
     def connect_to_db(self):
         pass
