@@ -1,7 +1,8 @@
 import logging
 from logging import Logger
 from typing import Protocol
-from logging import getLogger
+from datetime import datetime
+from dbcon import DBConnector
 
 logger: Logger = logging.getLogger(__name__)
 
