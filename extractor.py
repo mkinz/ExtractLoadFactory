@@ -16,7 +16,15 @@ class Extractor(Protocol):
 
 class ConcreteExtractorInstanceA:
     def extract(self, source_db_connection: DBConnector, date_time: datetime):
-        query = f"select * from myschema.mytable where date = {date_time}"
+        query = f"select * from myschema.mytable_A where date = {date_time}"
         logger.debug(query)
-        logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable ")
+        logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable_A ")
         return "### Mock extracted Data from Source A ###"
+
+
+class ConcreteExtractorInstanceB:
+    def extract(self, source_db_connection: DBConnector, date_time: datetime):
+        query = f"select * from myschema.mytable_B where date = {date_time}"
+        logger.debug(query)
+        logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable_B ")
+        return "### Mock extracted Data from Source B ###"

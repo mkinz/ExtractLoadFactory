@@ -3,7 +3,7 @@ from logging import Logger
 from datetime import datetime
 from _collections_abc import Iterable
 
-from factories import ConcreteDataRefresherFactoryA
+from factories import ConcreteDataRefresherFactoryA, ConcreteDataRefresherFactoryB
 
 logging.basicConfig(level=logging.DEBUG)
 logger: Logger = logging.getLogger(__name__)
@@ -11,7 +11,8 @@ logger: Logger = logging.getLogger(__name__)
 
 def get_factory() -> Iterable:
     factories = {
-        "A": ConcreteDataRefresherFactoryA
+        "A": ConcreteDataRefresherFactoryA,
+        "B": ConcreteDataRefresherFactoryB
     }
 
     for work_set in factories.keys():

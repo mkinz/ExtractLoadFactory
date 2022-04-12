@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from dbcon import DBConnector, SourceDBConnector, TargetDBConnector
-from extractor import Extractor, ConcreteExtractorInstanceA
-from loader import Loader, ConcreteLoaderInstanceA
+from extractor import Extractor, ConcreteExtractorInstanceA, ConcreteExtractorInstanceB
+from loader import Loader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
 
 logger: Logger = logging.getLogger(__name__)
 
@@ -48,3 +48,23 @@ class ConcreteDataRefresherFactoryA:
     @staticmethod
     def get_loader() -> Loader:
         return ConcreteLoaderInstanceA()
+
+
+@dataclass
+class ConcreteDataRefresherFactoryB:
+
+    @staticmethod
+    def get_source_connector() -> DBConnector:
+        return SourceDBConnector()
+
+    @staticmethod
+    def get_extractor() -> Extractor:
+        return ConcreteExtractorInstanceB()
+
+    @staticmethod
+    def get_target_connector() -> DBConnector:
+        return TargetDBConnector()
+
+    @staticmethod
+    def get_loader() -> Loader:
+        return ConcreteLoaderInstanceB()
