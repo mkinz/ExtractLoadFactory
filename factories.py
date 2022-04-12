@@ -31,7 +31,7 @@ class DataRefresherFactory(Protocol):
 
 
 @dataclass
-class ConcreteDataRefresherInstanceA:
+class ConcreteDataRefresherFactoryA:
 
     @staticmethod
     def get_source_connector() -> DBConnector:
