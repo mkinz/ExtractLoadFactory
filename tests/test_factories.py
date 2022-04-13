@@ -7,10 +7,10 @@ from dbcon import DBConnector
 class FactoriesTestCase(unittest.TestCase):
     def test_Concrete_factory_A_returns_correct_objects(self):
         dut = ConcreteDataRefresherFactoryA
-        loader = dut.get_loader()
-        extractor = dut.get_extractor()
-        source_conn = dut.get_source_connector()
-        target_conn = dut.get_target_connector()
+        loader = dut.get_loader(self)
+        extractor = dut.get_extractor(self)
+        source_conn = dut.get_source_connector(self)
+        target_conn = dut.get_target_connector(self)
 
         self.assertIsInstance(loader, Loader)
         self.assertIsInstance(extractor, Extractor)
@@ -19,10 +19,10 @@ class FactoriesTestCase(unittest.TestCase):
 
     def test_Concrete_factory_B_returns_correct_objects(self):
         dut = ConcreteDataRefresherFactoryB
-        loader = dut.get_loader()
-        extractor = dut.get_extractor()
-        source_conn = dut.get_source_connector()
-        target_conn = dut.get_target_connector()
+        loader = dut.get_loader(self)
+        extractor = dut.get_extractor(self)
+        source_conn = dut.get_source_connector(self)
+        target_conn = dut.get_target_connector(self)
 
         self.assertIsInstance(loader, Loader)
         self.assertIsInstance(extractor, Extractor)

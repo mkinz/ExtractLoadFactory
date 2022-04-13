@@ -13,58 +13,46 @@ logger: Logger = logging.getLogger(__name__)
 @dataclass
 class DataRefresherFactory(Protocol):
 
-    @staticmethod
-    def get_source_connector() -> DBConnector:
+    def get_source_connector(self) -> DBConnector:
         """returns a new source dbconnector instance"""
 
-    @staticmethod
-    def get_extractor() -> Extractor:
+    def get_extractor(self) -> Extractor:
         """returns a new extractor instance"""
-
-    @staticmethod
-    def get_target_connector() -> DBConnector:
+    
+    def get_target_connector(self) -> DBConnector:
         """returns a new target dbconnector instance"""
-
-    @staticmethod
-    def get_loader() -> Loader:
+    
+    def get_loader(self) -> Loader:
         """returns a new loader instance"""
 
 
 @dataclass
 class ConcreteDataRefresherFactoryA:
-
-    @staticmethod
-    def get_source_connector() -> DBConnector:
+    
+    def get_source_connector(self) -> DBConnector:
         return SourceDBConnector()
-
-    @staticmethod
-    def get_extractor() -> Extractor:
+    
+    def get_extractor(self) -> Extractor:
         return ConcreteExtractorInstanceA()
-
-    @staticmethod
-    def get_target_connector() -> DBConnector:
+    
+    def get_target_connector(self) -> DBConnector:
         return TargetDBConnector()
-
-    @staticmethod
-    def get_loader() -> Loader:
+    
+    def get_loader(self) -> Loader:
         return ConcreteLoaderInstanceA()
 
 
 @dataclass
 class ConcreteDataRefresherFactoryB:
 
-    @staticmethod
-    def get_source_connector() -> DBConnector:
+    def get_source_connector(self) -> DBConnector:
         return SourceDBConnector()
-
-    @staticmethod
-    def get_extractor() -> Extractor:
+    
+    def get_extractor(self) -> Extractor:
         return ConcreteExtractorInstanceB()
 
-    @staticmethod
-    def get_target_connector() -> DBConnector:
+    def get_target_connector(self) -> DBConnector:
         return TargetDBConnector()
-
-    @staticmethod
-    def get_loader() -> Loader:
+    
+    def get_loader(self) -> Loader:
         return ConcreteLoaderInstanceB()
