@@ -26,7 +26,6 @@ class DataRefresherFactory(Protocol):
         """returns a new loader instance"""
 
 
-@dataclass
 class ConcreteDataRefresherFactoryA:
     
     def get_source_connector(self) -> DBConnector:
@@ -42,7 +41,6 @@ class ConcreteDataRefresherFactoryA:
         return ConcreteLoaderInstanceA()
 
 
-@dataclass
 class ConcreteDataRefresherFactoryB:
 
     def get_source_connector(self) -> DBConnector:
