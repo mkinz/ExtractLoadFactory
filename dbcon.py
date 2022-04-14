@@ -8,7 +8,7 @@ logger: Logger = logging.getLogger(__name__)
 @runtime_checkable
 class DBConnector(Protocol):
     def connect_to_db(self):
-        pass
+        ...
 
 
 class SourceDBConnector:

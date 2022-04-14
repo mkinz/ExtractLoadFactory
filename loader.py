@@ -12,6 +12,7 @@ class Loader(Protocol):
     def load_data(self, target_db_connection: DBConnector, data_to_load, date_time: datetime):
         ...
 
+
 class ConcreteLoaderInstanceA:
     def load_data(self, target_db_connection: DBConnector, data_to_load, date_time: datetime):
         query = f"update {target_db_connection}.myschma.mytable_A" \

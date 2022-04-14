@@ -14,15 +14,19 @@ class DataRefresherFactory(Protocol):
 
     def get_source_connector(self) -> DBConnector:
         """returns a new source dbconnector instance"""
+        ...
 
     def get_extractor(self) -> Extractor:
         """returns a new extractor instance"""
-    
+        ...
+
     def get_target_connector(self) -> DBConnector:
         """returns a new target dbconnector instance"""
-    
+        ...
+
     def get_loader(self) -> Loader:
         """returns a new loader instance"""
+        ...
 
 
 class ConcreteDataRefresherFactoryA:
