@@ -6,14 +6,16 @@ from dbcon import DBConnector
 
 logger: Logger = logging.getLogger(__name__)
 
+    
 @runtime_checkable
 class Extractor(Protocol):
     """"
     Interface that defines an extractor class
     """
     def extract(self, source_db_connection: DBConnector, date_time: datetime):
-        pass
+        ...
 
+        
 class ConcreteExtractorInstanceA:
     def extract(self, source_db_connection: DBConnector, date_time: datetime):
         query = f"select * from myschema.mytable_A where date = {date_time}"
