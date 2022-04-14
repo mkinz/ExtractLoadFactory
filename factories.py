@@ -10,7 +10,6 @@ from loader import Loader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
 logger: Logger = logging.getLogger(__name__)
 
 
-@dataclass
 class DataRefresherFactory(Protocol):
 
     def get_source_connector(self) -> DBConnector:
