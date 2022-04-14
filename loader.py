@@ -6,11 +6,11 @@ from dbcon import DBConnector
 
 logger: Logger = logging.getLogger(__name__)
 
+
 @runtime_checkable
 class Loader(Protocol):
     def load_data(self, target_db_connection: DBConnector, data_to_load, date_time: datetime):
         pass
-
 
 class ConcreteLoaderInstanceA:
     def load_data(self, target_db_connection: DBConnector, data_to_load, date_time: datetime):
