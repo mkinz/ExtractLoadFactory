@@ -11,8 +11,8 @@ logger: Logger = logging.getLogger(__name__)
 
 def get_factory() -> Iterable:
     factories = {
-        "A": ConcreteDataRefresherFactoryA,
-        "B": ConcreteDataRefresherFactoryB
+        "A": ConcreteDataRefresherFactoryA(),
+        "B": ConcreteDataRefresherFactoryB()
     }
 
     for work_set in factories.keys():
@@ -33,6 +33,7 @@ def run_app():
         target_conn = target_db_connector_object.connect_to_db()
 
         loader_object = fac.get_loader()
+        loader_object.validate_input(extracted_data)
         loader_object.load_data(target_conn, extracted_data, today)
 
         logger.info("Extract and Load complete.\n")

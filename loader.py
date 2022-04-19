@@ -27,8 +27,8 @@ class ConcreteLoaderInstanceA:
         self.contains_data = False
 
     def validate_input(self, data_to_load):
-        if not data_to_load.empty:
-            self.contains_data = True
+        #if not data_to_load.empty:
+        self.contains_data = True
 
     def load_data(self, target_db_connection: DBConnector, data_to_load: pd.DataFrame, date_time: datetime):
         query = f"update {target_db_connection}.myschma.mytable_A" \
@@ -48,8 +48,9 @@ class ConcreteLoaderInstanceB:
         self.contains_data = False
 
     def validate_input(self, data_to_load):
-        if not data_to_load.empty:
-            self.contains_data = True
+        #if not data_to_load.empty:
+        self.contains_data = True
+
     def load_data(self, target_db_connection: DBConnector, data_to_load: pd.DataFrame, date_time: datetime):
         query = f"update {target_db_connection}.myschma.mytable_B" \
                 f"set data = {data_to_load}" \
