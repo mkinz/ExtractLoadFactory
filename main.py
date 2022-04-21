@@ -40,22 +40,34 @@ def run_app():
 
     for fac in get_factory():
         try:
+
+            # get objects
             source_db_connector_object = fac.get_source_connector()
+            target_db_connector_object = fac.get_target_connector()
+            loader_object = fac.get_loader()
+            extractor_object = fac.get_extractor()
+            validator_object = fac.get_validator()
+
+            # connect to source
             source_conn = source_db_connector_object.connect_to_db()
             if not source_db_connector_object.connected:
                 raise SourceConnectionError
 
-            extractor_object = fac.get_extractor()
+            # run data extraction
             extracted_data = extractor_object.extract(source_conn, today)
 
-            target_db_connector_object = fac.get_target_connector()
-            target_conn = target_db_connector_object.connect_to_db()
-            if not target_db_connector_object.connected:
-                raise TargetConnectionError
+            # run data validation
+            validator_object.validate(extracted_data)
+            if validator_object.validated_data:
 
-            loader_object = fac.get_loader()
-            loader_object.validate_input(extracted_data)
-            loader_object.load_data(target_conn, extracted_data, today)
+                # connect to target
+                target_conn = target_db_connector_object.connect_to_db()
+                if not target_db_connector_object.connected:
+                    raise TargetConnectionError
+
+                # load data to target
+                loader_object.load_data(target_conn, extracted_data, today)
+
         except ConnectionError:
             logger.info("Connection was unabled to be established.")
 

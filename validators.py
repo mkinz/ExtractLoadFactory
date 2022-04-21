@@ -16,17 +16,17 @@ class IValidator(ABC):
         pass
 
     @abstractmethod
-    def validate_data(self, data_to_validate: pd.DataFrame) -> None:
+    def validate(self, data_to_validate: pd.DataFrame) -> None:
         pass
 
 
 class ConcreteValidator(IValidator):
     def __init__(self):
-        self.validated = False
+        self.validated_data = False
 
-    def validate_data(self, data_to_validate: pd.DataFrame) -> None:
+    def validate(self, data_to_validate: pd.DataFrame) -> None:
         if len(data_to_validate) > 0:
-            self.validated = True
+            self.validated_data = True
             logger.info("Data Validated! Proceeding to load stage...")
         else:
             logger.info("Could not validate data. Exiting...")
