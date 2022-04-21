@@ -1,11 +1,11 @@
 import logging
 from logging import Logger
-from dataclasses import dataclass
 from typing import Protocol
 
 from dbcon import DBConnector, SourceDBConnector, TargetDBConnector
 from extractor import Extractor, ConcreteExtractorInstanceA, ConcreteExtractorInstanceB
 from loader import Loader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
+from validators import IValidator, ConcreteValidator
 
 logger: Logger = logging.getLogger(__name__)
 
@@ -28,6 +28,10 @@ class DataRefresherFactory(Protocol):
         """returns a new loader instance"""
         ...
 
+    def get_validator(self) -> IValidator:
+        """returns a validator instance"""
+        ...
+
 
 class ConcreteDataRefresherFactoryA:
     
@@ -43,6 +47,9 @@ class ConcreteDataRefresherFactoryA:
     def get_loader(self) -> Loader:
         return ConcreteLoaderInstanceA()
 
+    def get_validator(self) -> IValidator:
+        return ConcreteValidator()
+
 
 class ConcreteDataRefresherFactoryB:
 
@@ -57,3 +64,6 @@ class ConcreteDataRefresherFactoryB:
     
     def get_loader(self) -> Loader:
         return ConcreteLoaderInstanceB()
+
+    def get_validator(self) -> IValidator:
+        return ConcreteValidator()
