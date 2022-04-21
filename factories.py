@@ -2,29 +2,32 @@ import logging
 from logging import Logger
 from typing import Protocol
 
-from dbcon import DBConnector, SourceDBConnector, TargetDBConnector
-from extractor import Extractor, ConcreteExtractorInstanceA, ConcreteExtractorInstanceB
-from loader import Loader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
+from dbcon import IDBConnector, SourceDBConnector, TargetDBConnector
+from iextractor import IExtractor, ConcreteExtractorInstanceA, ConcreteExtractorInstanceB
+from iloader import ILoader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
 from validators import IValidator, ConcreteValidator
 
 logger: Logger = logging.getLogger(__name__)
 
 
-class DataRefresherFactory(Protocol):
+class IDataRefresherFactory(Protocol):
+    """
+    Interface that establishes factory protocol
+    """
 
-    def get_source_connector(self) -> DBConnector:
+    def get_source_connector(self) -> IDBConnector:
         """returns a new source dbconnector instance"""
         ...
 
-    def get_extractor(self) -> Extractor:
+    def get_extractor(self) -> IExtractor:
         """returns a new extractor instance"""
         ...
 
-    def get_target_connector(self) -> DBConnector:
+    def get_target_connector(self) -> IDBConnector:
         """returns a new target dbconnector instance"""
         ...
 
-    def get_loader(self) -> Loader:
+    def get_loader(self) -> ILoader:
         """returns a new loader instance"""
         ...
 
@@ -35,16 +38,16 @@ class DataRefresherFactory(Protocol):
 
 class GenericConcreteDataRefresherFactory:
 
-    def get_source_connector(self) -> DBConnector:
+    def get_source_connector(self) -> IDBConnector:
         return SourceDBConnector()
 
-    def get_extractor(self) -> Extractor:
+    def get_extractor(self) -> IExtractor:
         pass
 
-    def get_target_connector(self) -> DBConnector:
+    def get_target_connector(self) -> IDBConnector:
         return TargetDBConnector()
 
-    def get_loader(self) -> Loader:
+    def get_loader(self) -> ILoader:
         pass
 
     def get_validator(self) -> IValidator:
@@ -53,17 +56,17 @@ class GenericConcreteDataRefresherFactory:
 
 class ConcreteDataRefresherFactoryA(GenericConcreteDataRefresherFactory):
 
-    def get_extractor(self) -> Extractor:
+    def get_extractor(self) -> IExtractor:
         return ConcreteExtractorInstanceA()
 
-    def get_loader(self) -> Loader:
+    def get_loader(self) -> ILoader:
         return ConcreteLoaderInstanceA()
 
 
 class ConcreteDataRefresherFactoryB(GenericConcreteDataRefresherFactory):
     
-    def get_extractor(self) -> Extractor:
+    def get_extractor(self) -> IExtractor:
         return ConcreteExtractorInstanceB()
 
-    def get_loader(self) -> Loader:
+    def get_loader(self) -> ILoader:
         return ConcreteLoaderInstanceB()

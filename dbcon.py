@@ -6,7 +6,10 @@ logger: Logger = logging.getLogger(__name__)
 
 
 @runtime_checkable
-class DBConnector(Protocol):
+class IDBConnector(Protocol):
+    """
+    Interface that establishes dbconnections protocol
+    """
 
     def __init__(self):
         ...

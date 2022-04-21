@@ -8,7 +8,7 @@ logger: Logger = logging.getLogger(__name__)
 
 class IValidator(ABC):
     """
-    Class to handle data validation responsibility
+    Interface that establishes validator protocol
     """
 
     @abstractmethod

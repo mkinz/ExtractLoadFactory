@@ -1,10 +1,10 @@
 import unittest
-from loader import Loader, ConcreteLoaderInstanceA
+from iloader import ILoader, ConcreteLoaderInstanceA
 
 class LoaderTestCase(unittest.TestCase):
     def test_concrete_loader_A_is_instance_of_Loader(self):
         dut = ConcreteLoaderInstanceA()
-        self.assertIsInstance(dut, Loader)  # add assertion here
+        self.assertIsInstance(dut, ILoader)  # add assertion here
 
 
 if __name__ == '__main__':
