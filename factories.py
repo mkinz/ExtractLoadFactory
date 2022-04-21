@@ -3,8 +3,8 @@ from logging import Logger
 from typing import Protocol
 
 from dbcon import IDBConnector, SourceDBConnector, TargetDBConnector
-from iextractor import IExtractor, ConcreteExtractorInstanceA, ConcreteExtractorInstanceB
-from iloader import ILoader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
+from extractor import IExtractor, ConcreteExtractorInstanceA, ConcreteExtractorInstanceB
+from loader import ILoader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
 from validators import IValidator, ConcreteValidator
 
 logger: Logger = logging.getLogger(__name__)

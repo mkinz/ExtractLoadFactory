@@ -1,6 +1,6 @@
 import unittest
 
-from iextractor import IExtractor, ConcreteExtractorInstanceA
+from extractor import IExtractor, ConcreteExtractorInstanceA
 
 class ExtractorTestCases(unittest.TestCase):
 

@@ -1,7 +1,7 @@
 import unittest
 from factories import ConcreteDataRefresherFactoryA, ConcreteDataRefresherFactoryB
-from iloader import ILoader
-from iextractor import IExtractor
+from loader import ILoader
+from extractor import IExtractor
 from dbcon import IDBConnector
 
 class FactoriesTestCase(unittest.TestCase):

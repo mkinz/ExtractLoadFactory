@@ -1,5 +1,5 @@
 import unittest
-from iloader import ILoader, ConcreteLoaderInstanceA
+from loader import ILoader, ConcreteLoaderInstanceA
 
 class LoaderTestCase(unittest.TestCase):
     def test_concrete_loader_A_is_instance_of_Loader(self):
