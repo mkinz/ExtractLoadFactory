@@ -30,52 +30,55 @@ def get_factory() -> Iterable:
         "B": ConcreteDataRefresherFactoryB()
     }
 
-    for work_set in factories.keys():
+    for work_set in factories:
         yield factories[work_set]
 
 
-def run_app():
-    logger.info("Initializing ExtractLoadFactory...")
-    today = datetime.today()
+class Runner:
 
-    for fac in get_factory():
-        try:
+    def run_app(self):
+        logger.info("Initializing ExtractLoadFactory...")
+        today = datetime.today()
 
-            # get objects
-            source_db_connector_object = fac.get_source_connector()
-            target_db_connector_object = fac.get_target_connector()
-            loader_object = fac.get_loader()
-            extractor_object = fac.get_extractor()
-            validator_object = fac.get_validator()
+        for fac in get_factory():
+            try:
 
-            # connect to source
-            source_conn = source_db_connector_object.connect_to_db()
-            if not source_db_connector_object.connected:
-                raise SourceConnectionError
+                # get objects
+                source_db_connector_object = fac.get_source_connector()
+                target_db_connector_object = fac.get_target_connector()
+                loader_object = fac.get_loader()
+                extractor_object = fac.get_extractor()
+                validator_object = fac.get_validator()
 
-            # run data extraction
-            extracted_data = extractor_object.extract(source_conn, today)
+                # connect to source
+                source_conn = source_db_connector_object.connect_to_db()
+                if not source_db_connector_object.connected:
+                    raise SourceConnectionError
 
-            # run data validation
-            validator_object.validate(extracted_data)
-            if validator_object.validated_data:
+                # run data extraction
+                extracted_data = extractor_object.extract(source_conn, today)
 
-                # connect to target
-                target_conn = target_db_connector_object.connect_to_db()
-                if not target_db_connector_object.connected:
-                    raise TargetConnectionError
+                # run data validation
+                validator_object.validate(extracted_data)
+                if validator_object.validated_data:
 
-                # load data to target
-                loader_object.load_data(target_conn, extracted_data, today)
+                    # connect to target
+                    target_conn = target_db_connector_object.connect_to_db()
+                    if not target_db_connector_object.connected:
+                        raise TargetConnectionError
 
-        except ConnectionError:
-            logger.info("Connection was unabled to be established.")
+                    # load data to target
+                    loader_object.load_data(target_conn, extracted_data, today)
 
-        logger.info("Extract and Load complete.\n")
+            except ConnectionError:
+                logger.info("Connection was unabled to be established.")
+
+            logger.info("Extract and Load complete.\n")
 
 
 def main():
-    run_app()
+    runner = Runner()
+    runner.run_app()
 
 
 if __name__ == '__main__':
