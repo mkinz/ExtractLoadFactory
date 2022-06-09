@@ -4,24 +4,10 @@ from datetime import datetime
 from _collections_abc import Iterable
 
 from factories import ConcreteDataRefresherFactoryA, ConcreteDataRefresherFactoryB
+from custom_exceptions import SourceConnectionError, TargetConnectionError
 
 logging.basicConfig(level=logging.DEBUG)
 logger: Logger = logging.getLogger(__name__)
-
-
-class ConnectionError(Exception):
-    """
-    Custom exception for handling connection errors
-    """
-    pass
-
-
-class SourceConnectionError(ConnectionError):
-    pass
-
-
-class TargetConnectionError(ConnectionError):
-    pass
 
 
 def get_factory() -> Iterable:
