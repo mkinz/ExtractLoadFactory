@@ -38,8 +38,7 @@ class Runner:
 
                 # connect to source
                 source_conn = source_db_connector_object.connect_to_db()
-                if not source_db_connector_object.connected:
-                    raise ConcreteSourceDBConnectionError
+                source_db_connector_object.get_connection_status()
                 extracted_data = extractor_object.extract(source_conn, today)
 
                 # run data validation
@@ -48,8 +47,7 @@ class Runner:
 
                     # connect to target
                     target_conn = target_db_connector_object.connect_to_db()
-                    if not target_db_connector_object.connected:
-                        raise ConcreteTargetDBConnectionError
+                    target_db_connector_object.get_connection_status()
 
                     # load data to target
                     loader_object.load_data(target_conn, extracted_data, today)
