@@ -83,8 +83,15 @@ class ConcreteDataRefresherFactoryA(GenericConcreteDataRefresherFactory):
     def get_extractor_object(self) -> GenericConcreteExtractor:
         return GenericConcreteExtractor()
 
-    def get_loader_object(self) -> ILoader:
+    def get_loader_object(self) -> GenericConcreteLoader:
         return GenericConcreteLoader()
+
+    def get_extraction_query(self, schema: str, date_range_start: str, date_range_end: str) -> str:
+        return f"""
+        select * from {schema}.TableA 
+        where {date_range_start} < date <= {date_range_end}
+        with ur
+        """
 
 
 class ConcreteDataRefresherFactoryB(GenericConcreteDataRefresherFactory):
@@ -92,5 +99,12 @@ class ConcreteDataRefresherFactoryB(GenericConcreteDataRefresherFactory):
     def get_extractor_object(self) -> GenericConcreteExtractor:
         return GenericConcreteExtractor()
 
-    def get_loader_object(self) -> ILoader:
+    def get_loader_object(self) -> GenericConcreteLoader:
         return GenericConcreteLoader()
+
+    def get_extraction_query(self, schema: str, date_range_start: str, date_range_end: str) -> str:
+        return f"""
+        select * from {schema}.TableB 
+        where {date_range_start} < date <= {date_range_end}
+        with ur
+        """
