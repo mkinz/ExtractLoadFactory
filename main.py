@@ -4,7 +4,7 @@ from datetime import datetime
 from _collections_abc import Iterable
 
 from factories import ConcreteDataRefresherFactoryA, ConcreteDataRefresherFactoryB
-from custom_exceptions import SourceConnectionError, TargetConnectionError
+from custom_exceptions import ConcreteSourceDBConnectionError, ConcreteTargetDBConnectionError
 
 logging.basicConfig(level=logging.DEBUG)
 logger: Logger = logging.getLogger(__name__)
@@ -39,7 +39,7 @@ class Runner:
                 # connect to source
                 source_conn = source_db_connector_object.connect_to_db()
                 if not source_db_connector_object.connected:
-                    raise SourceConnectionError
+                    raise ConcreteSourceDBConnectionError
                 extracted_data = extractor_object.extract(source_conn, today)
 
                 # run data validation
@@ -49,7 +49,7 @@ class Runner:
                     # connect to target
                     target_conn = target_db_connector_object.connect_to_db()
                     if not target_db_connector_object.connected:
-                        raise TargetConnectionError
+                        raise ConcreteTargetDBConnectionError
 
                     # load data to target
                     loader_object.load_data(target_conn, extracted_data, today)

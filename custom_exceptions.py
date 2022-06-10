@@ -5,9 +5,9 @@ class ConnectionError(Exception):
     pass
 
 
-class SourceConnectionError(ConnectionError):
+class ConcreteSourceDBConnectionError(ConnectionError):
     pass
 
 
-class TargetConnectionError(ConnectionError):
+class ConcreteTargetDBConnectionError(ConnectionError):
     pass
