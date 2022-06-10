@@ -30,11 +30,11 @@ class Runner:
             try:
 
                 # get objects
-                source_db_connector_object = fac.get_source_connector()
-                target_db_connector_object = fac.get_target_connector()
-                loader_object = fac.get_loader()
-                extractor_object = fac.get_extractor()
-                validator_object = fac.get_validator()
+                source_db_connector_object = fac.get_source_db_connector_object()
+                target_db_connector_object = fac.get_target_db_connector_object()
+                loader_object = fac.get_loader_object()
+                extractor_object = fac.get_extractor_object()
+                validator_object = fac.get_validator_object()
 
                 # connect to source
                 source_conn = source_db_connector_object.connect_to_db()
