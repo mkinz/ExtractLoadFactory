@@ -2,7 +2,7 @@ import logging
 from logging import Logger
 from typing import Protocol
 
-from dbcon import IDBConnector, SourceDBConnector, TargetDBConnector
+from dbcon import IDBConnector, ConcreteSourceDBConnector, ConcreteTargetDBConnector
 from extractor import IExtractor, ConcreteExtractorInstanceA, ConcreteExtractorInstanceB
 from loader import ILoader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
 from validators import IValidator, ConcreteValidator
@@ -39,13 +39,13 @@ class IDataRefresherFactory(Protocol):
 class GenericConcreteDataRefresherFactory:
 
     def get_source_connector(self) -> IDBConnector:
-        return SourceDBConnector()
+        return ConcreteSourceDBConnector()
 
     def get_extractor(self) -> IExtractor:
         pass
 
     def get_target_connector(self) -> IDBConnector:
-        return TargetDBConnector()
+        return ConcreteTargetDBConnector()
 
     def get_loader(self) -> ILoader:
         pass
