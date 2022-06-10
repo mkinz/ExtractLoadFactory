@@ -56,7 +56,7 @@ class GenericConcreteDataRefresherFactory:
 
 class ConcreteDataRefresherFactoryA(GenericConcreteDataRefresherFactory):
 
-    def get_extractor(self) -> IExtractor:
+    def get_extractor(self) -> GenericConcreteExtractor:
         return GenericConcreteExtractor()
 
     def get_loader(self) -> ILoader:
@@ -65,7 +65,7 @@ class ConcreteDataRefresherFactoryA(GenericConcreteDataRefresherFactory):
 
 class ConcreteDataRefresherFactoryB(GenericConcreteDataRefresherFactory):
     
-    def get_extractor(self) -> IExtractor:
+    def get_extractor(self) -> GenericConcreteExtractor:
         return GenericConcreteExtractor()
 
     def get_loader(self) -> ILoader:
