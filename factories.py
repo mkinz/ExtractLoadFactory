@@ -50,35 +50,47 @@ class IDataRefresherFactory(Protocol):
 
 class GenericConcreteDataRefresherFactory:
 
-    def get_source_connector(self) -> IDBConnector:
+    def get_source_db_connector_object(self) -> IDBConnector:
         return ConcreteSourceDBConnector()
 
-    def get_extractor(self) -> IExtractor:
+    def get_extractor_object(self) -> IExtractor:
         pass
 
-    def get_target_connector(self) -> IDBConnector:
+    def get_target_db_connector_object(self) -> IDBConnector:
         return ConcreteTargetDBConnector()
 
-    def get_loader(self) -> ILoader:
+    def get_loader_object(self) -> ILoader:
         pass
 
-    def get_validator(self) -> IValidator:
+    def get_validator_object(self) -> IValidator:
         return ConcreteValidator()
+
+    def get_extraction_query(self, schema: str, date_range_start: str, date_range_end: str) -> str:
+        pass
+
+    def get_data_load_query(self, schema: str, date_range_start: str, date_range_end: str) -> str:
+        pass
+
+    def get_source_table_name(self) -> str:
+        pass
+
+    def get_target_table_name(self) -> str:
+        pass
 
 
 class ConcreteDataRefresherFactoryA(GenericConcreteDataRefresherFactory):
 
-    def get_extractor(self) -> GenericConcreteExtractor:
+    def get_extractor_object(self) -> GenericConcreteExtractor:
         return GenericConcreteExtractor()
 
-    def get_loader(self) -> ILoader:
+    def get_loader_object(self) -> ILoader:
         return GenericConcreteLoader()
 
 
 class ConcreteDataRefresherFactoryB(GenericConcreteDataRefresherFactory):
     
-    def get_extractor(self) -> GenericConcreteExtractor:
+    def get_extractor_object(self) -> GenericConcreteExtractor:
         return GenericConcreteExtractor()
 
-    def get_loader(self) -> ILoader:
+    def get_loader_object(self) -> ILoader:
         return GenericConcreteLoader()
