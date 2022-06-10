@@ -40,7 +40,6 @@ class Runner:
                 source_conn = source_db_connector_object.connect_to_db()
                 if not source_db_connector_object.connected:
                     raise SourceConnectionError
-y
                 extracted_data = extractor_object.extract(source_conn, today)
 
                 # run data validation
