@@ -18,5 +18,5 @@ class IExtractor(Protocol):
         
 class GenericConcreteExtractor:
     def extract(self, source_db_connection: IDBConnector, query: str):
-        logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable_A using query: {query} ")
-        return "### Mock extracted Data from Source A ###"
+        logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable_A using query: '{query}' ")
+        return "### Mock extracted Data ###"

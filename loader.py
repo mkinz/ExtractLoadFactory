@@ -18,27 +18,11 @@ class ILoader(Protocol):
         ...
 
 
-class ConcreteLoaderInstanceA:
+class GenericConcreteLoader:
 
-    def load_data(self, target_db_connection: IDBConnector, data_to_load: pd.DataFrame, date_time: datetime):
-        query = f"update {target_db_connection}.myschma.mytable_A" \
-                f"set data = {data_to_load}" \
-                f"where date = {date_time}"
+    def load_data(self, target_db_connection: IDBConnector, schema: str, tablename: str, data_to_load: pd.DataFrame) -> None:
+        query = f"update {target_db_connection}.{schema}.{tablename}" \
+                f" set data = '{data_to_load}'" \
 
-        logger.debug(f"Ran the following SQL query:")
-        logger.debug(query)
-        logger.debug(f"Load sql query complete to {target_db_connection}.myschema.mytable_A.")
+        logger.debug(f"ran the following query: {query}")
         return target_db_connection
-
-
-class ConcreteLoaderInstanceB:
-
-    def load_data(self, target_db_connection: IDBConnector, data_to_load: pd.DataFrame, date_time: datetime):
-        query = f"update {target_db_connection}.myschma.mytable_B" \
-                f"set data = {data_to_load}" \
-                f"where date = {date_time}"
-        logger.debug(f"Ran the following SQL query:")
-        logger.debug(query)
-        logger.debug(f"Load sql query complete to {target_db_connection}.myschema.mytable_B.")
-        return target_db_connection
-

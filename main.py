@@ -39,7 +39,7 @@ class Runner:
                 # connect to source
                 source_conn = source_db_connector_object.connect_to_db()
                 source_db_connector_object.get_connection_status()
-                extracted_data = extractor_object.extract(source_conn, today)
+                extracted_data = extractor_object.extract(source_conn, "select * from test_table limit 5")
 
                 # run data validation
                 validator_object.validate(extracted_data)
@@ -50,7 +50,7 @@ class Runner:
                     target_db_connector_object.get_connection_status()
 
                     # load data to target
-                    loader_object.load_data(target_conn, extracted_data, today)
+                    loader_object.load_data(target_conn, "myschema", "mytable", extracted_data)
 
             except ConnectionError:
                 logger.info("Connection was unabled to be established.")
