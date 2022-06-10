@@ -3,7 +3,7 @@ from logging import Logger
 from typing import Protocol
 
 from dbcon import IDBConnector, ConcreteSourceDBConnector, ConcreteTargetDBConnector
-from extractor import IExtractor, ConcreteExtractorInstanceA, ConcreteExtractorInstanceB
+from extractor import IExtractor, GenericConcreteExtractor
 from loader import ILoader, ConcreteLoaderInstanceA, ConcreteLoaderInstanceB
 from validators import IValidator, ConcreteValidator
 
@@ -57,7 +57,7 @@ class GenericConcreteDataRefresherFactory:
 class ConcreteDataRefresherFactoryA(GenericConcreteDataRefresherFactory):
 
     def get_extractor(self) -> IExtractor:
-        return ConcreteExtractorInstanceA()
+        return GenericConcreteExtractor()
 
     def get_loader(self) -> ILoader:
         return ConcreteLoaderInstanceA()
@@ -66,7 +66,7 @@ class ConcreteDataRefresherFactoryA(GenericConcreteDataRefresherFactory):
 class ConcreteDataRefresherFactoryB(GenericConcreteDataRefresherFactory):
     
     def get_extractor(self) -> IExtractor:
-        return ConcreteExtractorInstanceB()
+        return GenericConcreteExtractor()
 
     def get_loader(self) -> ILoader:
         return ConcreteLoaderInstanceB()

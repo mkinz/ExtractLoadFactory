@@ -16,17 +16,7 @@ class IExtractor(Protocol):
         ...
 
         
-class ConcreteExtractorInstanceA:
-    def extract(self, source_db_connection: IDBConnector, date_time: datetime):
-        query = f"select * from myschema.mytable_A where date = {date_time}"
-        logger.debug(query)
-        logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable_A ")
+class GenericConcreteExtractor:
+    def extract(self, source_db_connection: IDBConnector, query: str):
+        logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable_A using query: {query} ")
         return "### Mock extracted Data from Source A ###"
-
-
-class ConcreteExtractorInstanceB:
-    def extract(self, source_db_connection: IDBConnector, date_time: datetime):
-        query = f"select * from myschema.mytable_B where date = {date_time}"
-        logger.debug(query)
-        logger.debug(f"Extract completed from {source_db_connection}.myschema.mytable_B ")
-        return "### Mock extracted Data from Source B ###"
