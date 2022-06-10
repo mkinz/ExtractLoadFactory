@@ -105,6 +105,6 @@ class ConcreteDataRefresherFactoryB(GenericConcreteDataRefresherFactory):
     def get_extraction_query(self, schema: str, date_range_start: str, date_range_end: str) -> str:
         return f"""
         select * from {schema}.TableB 
-        where {date_range_start} < date <= {date_range_end}
+        where daterange between {date_range_start} and {date_range_end}
         with ur
         """

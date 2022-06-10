@@ -25,6 +25,8 @@ class Runner:
     def run_app(self):
         logger.info("Initializing ExtractLoadFactory...")
         today = datetime.today()
+        source_schema = "source_schema"
+        target_schema = "target_schema"
 
         for fac in get_factory():
             try:
@@ -39,7 +41,10 @@ class Runner:
                 # connect to source
                 source_conn = source_db_connector_object.connect_to_db()
                 source_db_connector_object.get_connection_status()
-                extracted_data = extractor_object.extract(source_conn, "select * from test_table limit 5")
+
+
+                extraction_query = fac.get_extraction_query(source_schema, "04-09-2022", "06-09-2022")
+                extracted_data = extractor_object.extract(source_conn, extraction_query)
 
                 # run data validation
                 validator_object.validate(extracted_data)
