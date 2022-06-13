@@ -4,7 +4,6 @@ from datetime import datetime
 from _collections_abc import Iterable
 
 from factories import ConcreteDataRefresherFactoryA, ConcreteDataRefresherFactoryB
-from custom_exceptions import ConcreteSourceDBConnectionError, ConcreteTargetDBConnectionError
 
 logging.basicConfig(level=logging.DEBUG)
 logger: Logger = logging.getLogger(__name__)
@@ -55,7 +54,7 @@ class Runner:
                     target_db_connector_object.get_connection_status()
 
                     # load data to target
-                    loader_object.load_data(target_conn, "myschema", "mytable", extracted_data)
+                    loader_object.load_data(target_conn, target_schema, "mytable", extracted_data)
 
             except ConnectionError:
                 logger.info("Connection was unabled to be established.")

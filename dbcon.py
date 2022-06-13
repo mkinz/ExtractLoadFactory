@@ -2,7 +2,7 @@ import logging
 from logging import Logger
 from typing import Protocol, runtime_checkable
 
-from custom_exceptions import ConcreteSourceDBConnectionError, ConcreteTargetDBConnectionError
+from custom_exceptions import ConcreteDBConnectionError
 logger: Logger = logging.getLogger(__name__)
 
 
@@ -47,7 +47,7 @@ class ConcreteSourceDBConnector(GenericConnector):
 
     def get_connection_status(self):
         if not self.connected:
-            raise ConcreteSourceDBConnectionError
+            raise ConcreteDBConnectionError
         else:
             logger.info("Successfully connected to Source Database")
 
@@ -59,6 +59,6 @@ class ConcreteTargetDBConnector(GenericConnector):
 
     def get_connection_status(self):
         if not self.connected:
-            raise ConcreteTargetDBConnectionError
+            raise ConcreteDBConnectionError
         else:
-            logger.info("Successfully connected to Source Database")
+            logger.info("Successfully connected to Target Database")
